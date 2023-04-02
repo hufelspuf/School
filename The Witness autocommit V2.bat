@@ -1,29 +1,30 @@
 @echo off
-cd /d C:\Users\julia\AppData\Roaming\The Witness
+set GameExe=witness64_d3d11.exe
+set SavePath=C:\Users\julia\AppData\Roaming\The Witness
+set GamePath=where witness64_d3d11.exe
+cd /d %SavePath%
 git pull
-cd /d C:\Users\julia\Desktop
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe where witness64_d3d11.exe`) DO (
+FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe where %GameExe%`) DO (
     SET var=%%F
 )
 
-echo Starting "witness64_d3d11.exe"...
-set MY_DIR_PATH=where witness64_d3d11.exe
-for /f "delims=" %%a in ('%MY_DIR_PATH%') do set MY_DIR=%%~dpa
+echo Starting "%GameExe%"...
+for /f "delims=" %%a in ('%GamePath%') do set MY_DIR=%%~dpa
 cd /d %MY_DIR%
 echo Current directory is: %CD%
-start "" "witness64_d3d11.exe"
+start "" "%GameExe%"
 
-echo Waiting for "witness64_d3d11.exe" to close...
+echo Waiting for "%GameExe%" to close...
 :LOOP
-tasklist /nh /fi "imagename eq witness64_d3d11.exe" | find /i "witness64_d3d11.exe" > nul
+tasklist /nh /fi "imagename eq %GameExe%" | find /i "%GameExe%" > nul
 if not errorlevel 1 (
     timeout /t 1 > nul
     goto LOOP
 )
 
-echo "witness64_d3d11.exe" has been closed. Performing post-exit actions...
-cd /d C:\Users\julia\AppData\Roaming\The Witness
+echo "%GameExe%" has been closed. Performing post-exit actions...
+cd /d %SavePath%
 git add .
 git commit -m "update savegame (%var%)"
 git push
