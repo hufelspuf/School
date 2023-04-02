@@ -1,0 +1,15 @@
+
+:/launcher
+render_profile 2
+fullscreen true
+vsync false
+highdpi false
+resolution 1
+multisampling 3
+custom_width 1920
+custom_height 1080
+shading_quality 2
+reflection_quality 2
+texture_quality 2
+texture_detail 2
+geometry_detail 2
