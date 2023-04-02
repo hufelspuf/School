@@ -4,7 +4,7 @@ git pull
 
 cd /d C:\Users\julia\Desktop
 
-taskkill /The Witness.lnk
+taskkill /"The Witness.lnk"
 
 FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe The Witness.lnk`) DO (
 SET var=%%F
