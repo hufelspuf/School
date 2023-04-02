@@ -5,7 +5,10 @@ set GamePath=where witness64_d3d11.exe
 cd /d %SavePath%
 git pull
 
-
+FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe %GameExe%`) DO (
+    SET var=%%F
+)
+ 
 echo Starting "%GameExe%"...
 for /f "delims=" %%a in ('%GamePath%') do set MY_DIR=%%~dpa
 cd /d %MY_DIR%
@@ -16,7 +19,6 @@ echo Waiting for "%GameExe%" to close...
 :LOOP
 tasklist /nh /fi "imagename eq %GameExe%" | find /i "%GameExe%" > nul
 if not errorlevel 1 (
-    SET var=%%F
     timeout /t 1 > nul
     goto LOOP
 )
