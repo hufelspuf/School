@@ -4,9 +4,9 @@ git pull
 
 cd /d C:\Users\julia\Desktop
 
-taskkill /"The Witness.lnk"
+for /f "delims=" %%a in ('where witness64_d3d11.exe') do taskkill /im "%%~nxa" /f
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe The Witness.lnk`) DO (
+FOR /F "tokens=* USEBACKQ" %%F IN (`ptime.exe where witness64_d3d11.exe`) DO (
 SET var=%%F
 )
 
